@@ -9,3 +9,7 @@ O usuário pode ter acesso tanto a receitas de comida quanto de bebidas.
 O usuário pode favoritar suas receitas preferidas.
 
 O usuário pode salvar suas receitas favoritas.
+
+# Login:
+
+Para criar o login foi utilizado: material-ui, formik e yup

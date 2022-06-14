@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Button, TextField } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+
+import * as Yup from "yup";
 
 import "./Login.css";
 
-import { MAX_LENGTH } from "../../services/variables";
-import { Button, Paper, TextField } from "@mui/material";
+import { MAX_LENGTH, remember } from "../../services/variables";
+
+const schema = Yup.object().shape({
+  email: Yup.string().required("Required field"),
+  password: Yup.string().required("Required field"),
+});
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -34,6 +41,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verify, setVerify] = useState(true);
+
+  const classes = useStyles();
 
   const navigate = useNavigate();
 

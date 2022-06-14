@@ -54,3 +54,7 @@ export const URL_MEAL_ITEM_INFO =
 
 export const URL_DRINK_ITEM_INFO =
   "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+
+export const remember = {
+  rememberMe: false,
+};
