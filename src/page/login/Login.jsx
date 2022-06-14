@@ -1,7 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MAX = 6;
+import { makeStyles } from "@material-ui/core";
+
+import "./Login.css";
+
+import { MAX_LENGTH } from "../../services/variables";
+import { Button, Paper, TextField } from "@mui/material";
+
+const useStyles = makeStyles((theme) => {
+  return {
+    root: {
+      display: "flex",
+      height: "100%",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      width: "30rem",
+    },
+    field: {
+      marginTop: theme.spacing(2),
+    },
+    submitButton: {
+      marginTop: theme.spacing(2),
+    },
+  };
+});
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +44,7 @@ function Login() {
 
   const verifyButton = () => {
     const verifyEmail = validateEmail();
-    const verifyPassword = password.length > MAX;
+    const verifyPassword = password.length > MAX_LENGTH;
     if (verifyEmail && verifyPassword) return setVerify(false);
     return setVerify(true);
   };
@@ -35,36 +62,37 @@ function Login() {
 
   return (
     <form>
-      <label htmlFor="email-input">
-        Email
-        <input
-          type="email"
-          data-testid="email-input"
-          value={email}
-          onChange={({ target }) => {
-            setEmail(target.value);
-          }}
-        />
-      </label>
-      <label htmlFor="password-input">
-        Password
-        <input
-          type="password"
-          data-testid="password-input"
-          value={password}
-          onChange={({ target }) => {
-            setPassword(target.value);
-          }}
-        />
-      </label>
-      <button
-        type="submit"
+      <TextField
+        data-testid="email-input"
+        label="email"
+        variant="outlined"
+        type="email"
+        value={email}
+        onChange={({ target }) => {
+          setEmail(target.value);
+        }}
+      />
+      <TextField
+        data-testid="password-input"
+        label="email"
+        variant="outlined"
+        type="password"
+        value={password}
+        onChange={({ target }) => {
+          setPassword(target.value);
+        }}
+      />
+
+      <Button
         data-testid="login-submit-btn"
+        type="submit"
+        variant="contained"
+        color="primary"
         disabled={verify}
         onClick={() => handleClick()}
       >
         Enter
-      </button>
+      </Button>
     </form>
   );
 }

@@ -1,0 +1,28 @@
+form {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__container {
+  width: 40vw;
+  height: 50vh;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form__container div {
+  width: 70%;
+}
+
+.form__container button {
+  width: 40%;
+  height: 15%;
+  font-size: 1vw;
+  font-weight: bolder;
+}
