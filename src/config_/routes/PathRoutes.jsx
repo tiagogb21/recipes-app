@@ -32,18 +32,17 @@ function PathRoutes() {
         element={<DetailedFoodInProgress />}
       />
       {/* drinks */}
-      <Route exact path="/drinks" element={<Drinks />}>
-        <Route exact path="/drinks/:id" element={<DetailedDrink />} />
-        <Route
-          exact
-          path="/drinks/:id/in-progress"
-          element={<DetailedDrinkInProgress />}
-        />
-        {/* Profile */}
-        <Route exact path="/profile" element={<Profile />} />
-        {/* Recipes */}
-        <Route exact path="/done-recipes" element={<DoneRecipes />} />
-      </Route>
+      <Route exact path="/drinks" element={<Drinks />} />
+      <Route exact path="/drinks/:id" element={<DetailedDrink />} />
+      <Route
+        exact
+        path="/drinks/:id/in-progress"
+        element={<DetailedDrinkInProgress />}
+      />
+      {/* Profile */}
+      <Route exact path="/profile" element={<Profile />} />
+      {/* Recipes */}
+      <Route exact path="/done-recipes" element={<DoneRecipes />} />
       <Route exact path="/favorite-recipes" element={<FavoriteRecipes />} />
     </Routes>
   );

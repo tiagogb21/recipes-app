@@ -1,18 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Header from '../../components/Header';
-import Card from '../../components/Card';
-import Footer from '../../components/Footer';
+import Header from "../../components/Header";
+import Card from "../../components/Card";
+import Footer from "../../components/Footer";
 
-import MyContext from '../../context/MyContext';
+import MyContext from "../../context/MyContext";
 
 import {
   fetchMealCategories,
   fetchMealCategoriesFilter,
-}
-from '../../services/fetchApi';
-import { MAX_CATEGORIES, MAX, GLOBAL_MESSAGE } from '../../services/variables';
+} from "../../services/fetchApi";
+import { MAX_CATEGORIES, MAX, GLOBAL_MESSAGE } from "../../services/variables";
 
 function Food() {
   const [categories, setCategories] = useState([]);
@@ -21,8 +20,10 @@ function Food() {
 
   const { data, setData, getMeals } = useContext(MyContext);
 
+  const navigate = useNavigate();
+
   const getDataInfo = async () => {
-    const getData = await getMeals('name', '');
+    const getData = await getMeals("name", "");
     setData(getData);
   };
 
@@ -56,60 +57,41 @@ function Food() {
     getCategories();
   }, []);
 
-  const history = useHistory();
-
   return (
     <>
       <Header title="Foods" />
       <article>
-        {
-          categories !== undefined
-          && (
-            categories.slice(0, MAX_CATEGORIES).map((cat) => (
-              <button
-                key={ cat.strCategory }
-                type="button"
-                data-testid={ `${cat.strCategory}-category-filter` }
-                onClick={ () => handleToogleClick(cat.strCategory) }
-              >
-                {cat.strCategory}
-              </button>
-            ))
-          )
-        }
+        {categories !== undefined &&
+          categories.slice(0, MAX_CATEGORIES).map((cat) => (
+            <button
+              key={cat.strCategory}
+              type="button"
+              data-testid={`${cat.strCategory}-category-filter`}
+              onClick={() => handleToogleClick(cat.strCategory)}
+            >
+              {cat.strCategory}
+            </button>
+          ))}
         <button
           data-testid="All-category-filter"
           type="button"
-          onClick={ () => getDataInfo() }
+          onClick={() => getDataInfo()}
         >
           All
         </button>
       </article>
-      {
-        data === null
-        && global.alert(GLOBAL_MESSAGE)
-      }
-      {
-        (
-          data !== undefined
-          && data !== null
-          && data.length === 1
-          && verify
-        )
-        && (
-          history.push(`/foods/${data[0].idMeal}`)
-        )
-      }
-      {
-        (data !== undefined
-          && data !== null
-          && data.length >= 1)
-        && (
-          data.slice(0, MAX).map((item, index) => (
-            <Card item={ item } index={ index } key={ index } />
-          ))
-        )
-      }
+      {data === null && global.alert(GLOBAL_MESSAGE)}
+      {data !== undefined &&
+        data !== null &&
+        data.length === 1 &&
+        verify &&
+        navigate(`/foods/${data[0].idMeal}`)}
+      {data !== undefined &&
+        data !== null &&
+        data.length >= 1 &&
+        data
+          .slice(0, MAX)
+          .map((item, index) => <Card item={item} index={index} key={index} />)}
       <Footer />
     </>
   );

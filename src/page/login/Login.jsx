@@ -8,8 +8,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [verify, setVerify] = useState(true);
 
-  const history = useNavigate();
-  console.log(history);
+  const navigate = useNavigate();
 
   const validateEmail = () => {
     const re = /\S+@\S+/;
@@ -27,7 +26,7 @@ function Login() {
     localStorage.setItem("user", JSON.stringify({ email }));
     localStorage.setItem("mealsToken", 1);
     localStorage.setItem("cocktailsToken", 1);
-    history.push("/foods");
+    navigate("/foods");
   };
 
   useEffect(() => {
