@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import InputSearch from './InputSearch';
+import InputSearch from "./InputSearch";
 
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import profileIcon from "../images/profileIcon.svg";
+import searchIcon from "../images/searchIcon.svg";
 
 function Header({ title, verify }) {
   const [verifyInput, setVerifyInput] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleRedirect = (path) => {
-    history.push(path);
+    navigate(path);
   };
 
   return (
@@ -23,36 +23,22 @@ function Header({ title, verify }) {
       <button
         data-testid="profile-top-btn"
         type="button"
-        src={ profileIcon }
-        onClick={ () => handleRedirect('/profile') }
+        src={profileIcon}
+        onClick={() => handleRedirect("/profile")}
       >
-        <img
-          src={ profileIcon }
-          alt="profile icon"
-        />
+        <img src={profileIcon} alt="profile icon" />
       </button>
-      {
-        !verify
-        && (
-          <button
-            data-testid="search-top-btn"
-            type="button"
-            src={ searchIcon }
-            onClick={ () => setVerifyInput(!verifyInput) }
-          >
-            <img
-              src={ searchIcon }
-              alt="search button"
-            />
-          </button>
-        )
-      }
-      {
-        verifyInput
-        && (
-          <InputSearch />
-        )
-      }
+      {!verify && (
+        <button
+          data-testid="search-top-btn"
+          type="button"
+          src={searchIcon}
+          onClick={() => setVerifyInput(!verifyInput)}
+        >
+          <img src={searchIcon} alt="search button" />
+        </button>
+      )}
+      {verifyInput && <InputSearch />}
     </>
   );
 }
